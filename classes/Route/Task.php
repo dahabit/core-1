@@ -40,13 +40,6 @@ class Task extends Classes\Route\Fuel
 			return true;
 		}
 
-		// When the search matches the translation this is the hail mary attempt
-		if ($this->search == $this->translation)
-		{
-			$this->cli->write('Error: controller for command "'.$uri.'" not found.');
-			return  $this->parse('main/help');
-		}
-
 		// Failure...
 		return false;
 	}
