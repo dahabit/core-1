@@ -1,0 +1,6 @@
+{
+	"name": "fuel/core",
+	"require": {
+		"fuel/kernel": "dev-master"
+	}
+}
