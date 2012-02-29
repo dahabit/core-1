@@ -1,4 +1,12 @@
 <?php
+/**
+ * Part of the FuelPHP framework.
+ *
+ * @package    Fuel\Core
+ * @version    2.0.0
+ * @license    MIT License
+ * @copyright  2010 - 2012 Fuel Development Team
+ */
 
 namespace Fuel\Core\Parser;
 use Fuel\Kernel\Parser\Parsable;
@@ -6,15 +14,26 @@ use Twig_Environment;
 use Twig_Loader_Filesystem;
 use Twig_Loader_String;
 
+/**
+ * Twig template Parser.
+ *
+ * @package  Fuel\Core
+ *
+ * @since  1.1.0
+ */
 class Twig implements Parsable
 {
 	/**
 	 * @var  \Twig_Environment
+	 *
+	 * @since  1.1.0
 	 */
 	protected $parser;
 
 	/**
 	 * @var  \Twig_Loader_String
+	 *
+	 * @since  2.0.0
 	 */
 	protected $loader_string;
 
@@ -22,6 +41,8 @@ class Twig implements Parsable
 	 * Returns the expected file extension
 	 *
 	 * @return  string
+	 *
+	 * @since  2.0.0
 	 */
 	public function extension()
 	{
@@ -32,6 +53,8 @@ class Twig implements Parsable
 	 * Returns the Parser lib object
 	 *
 	 * @return  \Twig_Environment
+	 *
+	 * @since  1.1.0
 	 */
 	public function parser()
 	{
@@ -53,6 +76,8 @@ class Twig implements Parsable
 	 * @param   string  $path
 	 * @param   array   $data
 	 * @return  string
+	 *
+	 * @since  2.0.0
 	 */
 	public function parse_file($path, array $data = array())
 	{
@@ -77,9 +102,11 @@ class Twig implements Parsable
 	/**
 	 * Parses a given string using the given variables
 	 *
-	 * @param   string  $string
+	 * @param   string  $template
 	 * @param   array   $data
 	 * @return  string
+	 *
+	 * @since  2.0.0
 	 */
 	public function parse_string($template, array $data = array())
 	{
