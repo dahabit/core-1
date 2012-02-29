@@ -1,4 +1,12 @@
 <?php
+/**
+ * Generate Package Loader object and related configuration
+ *
+ * @package    Fuel\Core
+ * @version    2.0.0
+ * @license    MIT License
+ * @copyright  2010 - 2012 Fuel Development Team
+ */
 
 // Add some Core classes to the global DiC
 _env('dic')->set_classes(array(
