@@ -9,7 +9,7 @@
  */
 
 // Add some Core classes to the global DiC
-_env('dic')->set_classes(array(
+$env->dic->set_classes(array(
 	'Loader:Closure'    => 'Fuel\\Core\\Loader\\Closure',
 	'Loader:Lowercase'  => 'Fuel\\Core\\Loader\\Lowercase',
 	'Request:Curl'      => 'Fuel\\Core\\Request\\Curl',
@@ -19,7 +19,7 @@ _env('dic')->set_classes(array(
 ));
 
 // Forge and return the Core Package object
-return _forge('Loader:Package')
+return $env->forge('Loader:Package')
 	->set_path(__DIR__)
 	->set_namespace('Fuel\\Core')
 	->add_class_aliases(array(
