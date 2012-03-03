@@ -44,73 +44,48 @@ class Error extends \Fuel\Kernel\Error
 	);
 
 	/**
-	 * Shows an error. It will stop script execution if the error code is not
-	 * in the errors.continue_on whitelist.
+	 * Show non fatal error
 	 *
-	 * @param   \Exception  $e  the exception to show
+	 * @param   \Exception  $e
 	 * @return  void
 	 *
-	 * @since  1.0.0
+	 * @since  2.0.0
 	 */
-	public function show_error(\Exception $e)
+	public function show_non_fatal(\Exception $e)
 	{
-		$continue_on = $this->app->config->get('errors.continue_on', array());
-		$fatal       = ! in_array($e->getCode(), $continue_on);
-		$data        = $this->prepare_exception($e, $fatal);
-
-		if ($fatal)
-		{
-			$data['contents'] = ob_get_contents();
-			while (ob_get_level() > 0)
-			{
-				ob_end_clean();
-			}
-			$ob_callback = $this->app->config->get('ob_callback', null);
-			ob_start($ob_callback);
-		}
-		else
-		{
-			$this->non_fatal_cache[] = $data;
-		}
-
-		if ($this->app->env->is_cli)
-		{
-			$cli = $this->app->get_object('Cli');
-			$cli->write($cli->color($data['severity'].' - '.$data['message'].' in '.$data['filepath'].' on line '.$data['error_line'], 'red'));
-			$fatal and exit(1);
-			return;
-		}
-
-		if ($fatal)
-		{
-			if ( ! headers_sent())
-			{
-				$protocol = $this->app->env->input->server('SERVER_PROTOCOL')
-					? $this->app->env->input->server('SERVER_PROTOCOL')
-					: 'HTTP/1.1';
-				header($protocol.' 500 Internal Server Error');
-			}
-
-			$data['non_fatal'] = $this->non_fatal_cache;
-
-			$view_fatal = $this->app->config->get('errors.view_fatal', false);
-			if ($view_fatal)
-			{
-				exit($this->app->forge('View', $view_fatal, $data, false));
-			}
-			else
-			{
-				exit($data['severity'].' - '.$data['message'].' in '.$data['filepath'].' on line '.$data['error_line']);
-			}
-		}
-
 		try
 		{
-			echo $this->app->forge('View', $this->app->config->get('errors.view_error', 'error/500'), $data, false);
+			echo $this->app->forge('View',
+				$this->app->config->get('errors.view_error', 'error/500'),
+				$this->prepare_exception($e, false)
+			);
 		}
 		catch (\Exception $e)
 		{
-			echo '<pre>'.$e->getMessage().'</pre>';
+			parent::show_non_fatal($e);
+		}
+	}
+
+	/**
+	 * Show fatal error
+	 *
+	 * @param   \Exception  $e
+	 * @return  void
+	 *
+	 * @since  2.0.0
+	 */
+	public function show_fatal(\Exception $e)
+	{
+		$data['non_fatal'] = $this->non_fatal_cache;
+
+		$view_fatal = $this->app->config->get('errors.view_fatal', false);
+		if ($view_fatal)
+		{
+			exit($this->app->forge('View', $view_fatal, $data, false));
+		}
+		else
+		{
+			parent::show_fatal($e);
 		}
 	}
 
