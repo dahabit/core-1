@@ -10,6 +10,8 @@
 
 // Add some Core classes to the global DiC
 $env->dic->set_classes(array(
+	'Debug'             => 'Fuel\\Core\\Debug',
+	'Error'             => 'Fuel\\Core\\Error',
 	'Loader:Closure'    => 'Fuel\\Core\\Loader\\Closure',
 	'Loader:Lowercase'  => 'Fuel\\Core\\Loader\\Lowercase',
 	'Request:Curl'      => 'Fuel\\Core\\Request\\Curl',

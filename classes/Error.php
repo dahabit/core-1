@@ -96,7 +96,7 @@ class Error extends \Fuel\Kernel\Error
 			$view_fatal = $this->app->config->get('errors.view_fatal', false);
 			if ($view_fatal)
 			{
-				exit(_forge('View', $view_fatal, $data, false));
+				exit($this->app->forge('View', $view_fatal, $data, false));
 			}
 			else
 			{
@@ -106,11 +106,11 @@ class Error extends \Fuel\Kernel\Error
 
 		try
 		{
-			echo _forge('View', $this->app->config->get('errors.view_error', 'error/500'), $data, false);
+			echo $this->app->forge('View', $this->app->config->get('errors.view_error', 'error/500'), $data, false);
 		}
 		catch (\Exception $e)
 		{
-			echo $e->getMessage().'<br />';
+			echo '<pre>'.$e->getMessage().'</pre>';
 		}
 	}
 
