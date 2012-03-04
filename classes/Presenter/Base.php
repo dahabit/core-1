@@ -26,13 +26,6 @@ use Classes\View;
 abstract class Base extends View\Base
 {
 	/**
-	 * @var  \Fuel\Kernel\Loader\Loadable
-	 *
-	 * @since  2.0.0
-	 */
-	protected $_loader;
-
-	/**
 	 * @var  string|null  method to be run upon the Presenter, nothing will be ran when null
 	 *
 	 * @since  2.0.0
@@ -41,11 +34,13 @@ abstract class Base extends View\Base
 
 	/**
 	 * Constructor
+	 *
+	 * @param  array  $data
 	 */
-	public function __construct()
+	public function __construct(array $data = array())
 	{
+		parent::__construct(null, $data);
 		empty($this->_path) and $this->default_path();
-		$this->before();
 	}
 
 	/**
@@ -59,7 +54,7 @@ abstract class Base extends View\Base
 	public function _set_app(Application\Base $app)
 	{
 		parent::_set_app($app);
-		$this->_loader = $app->loader;
+		$this->before();
 	}
 
 	/**
@@ -110,7 +105,7 @@ abstract class Base extends View\Base
 	 *
 	 * @since  1.0.0
 	 */
-	protected function render($method = null)
+	protected function parse($method = null)
 	{
 		// Run a specific given method and finish up with after()
 		if ($method !== null)
@@ -126,6 +121,6 @@ abstract class Base extends View\Base
 			$this->after();
 		}
 
-		return parent::render();
+		return parent::parse();
 	}
 }

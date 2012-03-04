@@ -27,5 +27,6 @@ return $env->forge('Loader:Package')
 	->set_namespace('Fuel\\Core')
 	->add_class_aliases(array(
 		'Classes\\Controller\\Template'  => 'Fuel\\Core\\Controller\\Template',
+		'Classes\\Presenter\\Base'       => 'Fuel\\Core\\Presenter\\Base',
 		'Classes\\Request\\Curl'         => 'Fuel\\Core\\Request\\Curl',
 	));

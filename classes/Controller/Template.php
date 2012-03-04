@@ -20,7 +20,7 @@ use Classes\Controller\Base;
  *
  * @since  1.0.0
  */
-class Template extends Base
+abstract class Template extends Base
 {
 	/**
 	 * @var  string|\Fuel\Kernel\View\Viewable
