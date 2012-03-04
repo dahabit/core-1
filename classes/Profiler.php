@@ -87,9 +87,12 @@ class Profiler
 			}
 
 			$app_events = $this->env->loader->apps[$app]->notifier->observed();
-			foreach ($app_events as $timestamp => $event)
+			foreach ($app_events as $timestamp => $stamp_events)
 			{
-				$events[] = substr($timestamp, 0, strpos($timestamp, '-')).' :: '.$app.' :: '.$event;
+				foreach ($stamp_events as $event)
+				{
+					$events[] = $timestamp.' :: '.$app.' :: '.$event;
+				}
 			}
 		}
 		ksort($events);
