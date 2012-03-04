@@ -14,6 +14,7 @@ $env->dic->set_classes(array(
 	'Error'             => 'Fuel\\Core\\Error',
 	'Loader:Closure'    => 'Fuel\\Core\\Loader\\Closure',
 	'Loader:Lowercase'  => 'Fuel\\Core\\Loader\\Lowercase',
+	'Profiler'          => 'Fuel\\Core\\Profiler',
 	'Request:Curl'      => 'Fuel\\Core\\Request\\Curl',
 	'Security:Xss'      => 'Fuel\\Core\\Security\\String\\Xss',
 	'View:Markdown'     => 'Fuel\\Core\\View\\Markdown',
