@@ -91,6 +91,9 @@ class Profiler
 			{
 				foreach ($stamp_events as $event)
 				{
+					$timestamp .= ! ($pos = strpos($timestamp, '.'))
+						? '.0000'
+						: str_repeat('0', 5 - (strlen($timestamp) - $pos));
 					$events[] = $timestamp.' :: '.$app.' :: '.$event;
 				}
 			}
