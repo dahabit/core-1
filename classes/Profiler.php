@@ -77,7 +77,6 @@ class Profiler
 	public function events($apps = null)
 	{
 		$apps = is_null($apps) ? array_keys($this->env->loader->apps) : (array) $apps;
-
 		$events = array();
 		foreach ($apps as $app)
 		{
@@ -89,11 +88,10 @@ class Profiler
 			$app_events = $this->env->loader->apps[$app]->notifier->observed();
 			foreach ($app_events as $timestamp => $stamp_events)
 			{
+				$timestamp = substr($timestamp, 0, 10);
+				strlen($timestamp) < 10 and $timestamp = str_pad($timestamp, 10, '0');
 				foreach ($stamp_events as $event)
 				{
-					$timestamp .= ! ($pos = strpos($timestamp, '.'))
-						? '.0000'
-						: str_repeat('0', 5 - (strlen($timestamp) - $pos));
 					$events[] = $timestamp.' :: '.$app.' :: '.$event;
 				}
 			}

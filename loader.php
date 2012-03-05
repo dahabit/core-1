@@ -10,15 +10,15 @@
 
 // Add some Core classes to the global DiC
 $env->dic->set_classes(array(
-	'Debug'             => 'Fuel\\Core\\Debug',
-	'Error'             => 'Fuel\\Core\\Error',
-	'Loader:Closure'    => 'Fuel\\Core\\Loader\\Closure',
-	'Loader:Lowercase'  => 'Fuel\\Core\\Loader\\Lowercase',
-	'Profiler'          => 'Fuel\\Core\\Profiler',
-	'Request:Curl'      => 'Fuel\\Core\\Request\\Curl',
-	'Security:Xss'      => 'Fuel\\Core\\Security\\String\\Xss',
-	'View:Markdown'     => 'Fuel\\Core\\View\\Markdown',
-	'View:Twig'         => 'Fuel\\Core\\View\\Twig',
+	'Debug'                => 'Fuel\\Core\\Debug',
+	'Error'                => 'Fuel\\Core\\Error',
+	'Loader:Closure'       => 'Fuel\\Core\\Loader\\Closure',
+	'Loader:Lowercase'     => 'Fuel\\Core\\Loader\\Lowercase',
+	'Profiler'             => 'Fuel\\Core\\Profiler',
+	'Request:Curl'         => 'Fuel\\Core\\Request\\Curl',
+	'Security_String:Xss'  => 'Fuel\\Core\\Security\\String\\Xss',
+	'View:Markdown'        => 'Fuel\\Core\\View\\Markdown',
+	'View:Twig'            => 'Fuel\\Core\\View\\Twig',
 ));
 
 // Forge and return the Core Package object
