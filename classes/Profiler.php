@@ -77,7 +77,10 @@ class Profiler
 	public function events($apps = null)
 	{
 		$apps = is_null($apps) ? array_keys($this->env->loader->apps) : (array) $apps;
-		$events = array();
+		$events = array(
+			'0.000000000000000' => array('app' => 'ENV', 'event' => 'init'),
+			strval(microtime(true) - $this->env->get_var('init_time')) => array('event' => 'NOW'),
+		);
 		foreach ($apps as $app)
 		{
 			if ( ! isset($this->env->loader->apps[$app]))
@@ -86,14 +89,9 @@ class Profiler
 			}
 
 			$app_events = $this->env->loader->apps[$app]->notifier->observed();
-			foreach ($app_events as $timestamp => $stamp_events)
+			foreach ($app_events as $timestamp => $event)
 			{
-				$timestamp = substr($timestamp, 0, 10);
-				strlen($timestamp) < 10 and $timestamp = str_pad($timestamp, 10, '0');
-				foreach ($stamp_events as $event)
-				{
-					$events[] = $timestamp.' :: '.$app.' :: '.$event;
-				}
+				$events[$timestamp] = array('app' => $app, 'event' => $event);
 			}
 		}
 		ksort($events);
