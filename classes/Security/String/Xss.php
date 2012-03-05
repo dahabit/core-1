@@ -20,7 +20,7 @@ use Fuel\Kernel\Security\String;
  */
 class Xss extends String\Base
 {
-	public static function clean($input)
+	protected function secure($input)
 	{
 		// Load htmLawed if necessary
 		if ( ! function_exists('htmLawed'))
